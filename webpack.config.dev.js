@@ -1,8 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 
 module.exports = {
@@ -12,10 +10,8 @@ module.exports = {
     filename: "[name].[contenthash].js",
     // filename: "main.js",
     assetModuleFilename: 'static/images/[hash][ext][query]',
-    clean: true, //Sirve para limpiar el dist y eliminar los archivos creados en
-    //el build anterior.
   },
-  mode: "production",
+  mode: "development",
   resolve: {
     extensions: [".js"],
     alias: {
@@ -68,17 +64,5 @@ module.exports = {
       filename: "./static/[name].[contenthash].css",
     }),
     new Dotenv(),
-    // new CopyPlugin({
-    //   patterns: [
-    //     {
-    //       from: path.resolve("src", "assets", "images"),
-    //       to: "assets/images"
-    //     }
-    //   ]
-    // })
   ],
-  optimization: {
-    minimize: true,
-    minimizer: [new CssMinimizerPlugin(), '...'],
-  },
 }
